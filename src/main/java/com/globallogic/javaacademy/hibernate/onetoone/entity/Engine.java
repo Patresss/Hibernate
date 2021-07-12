@@ -1,24 +1,27 @@
 package com.globallogic.javaacademy.hibernate.onetoone.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
+
 
 @Entity
 public class Engine {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "engine_sequence")
+    @Column(name = "engine_id")
     private Long id;
 
     private String name;
 
     @OneToOne(mappedBy = "engine")
-    @JsonBackReference
     private Car car;
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -37,3 +40,4 @@ public class Engine {
         this.car = car;
     }
 }
+

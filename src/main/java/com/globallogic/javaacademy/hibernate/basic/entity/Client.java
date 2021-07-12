@@ -1,40 +1,36 @@
 package com.globallogic.javaacademy.hibernate.basic.entity;
 
+
+import com.globallogic.javaacademy.hibernate.basic.converter.YesNoConverter;
+
 import javax.persistence.*;
 import java.util.Date;
-import java.util.UUID;
 
 @Entity(name = "MyClient")
-@Table(name = "BUSSINESS_CLIENT")
+@Table(name = "GL_CLIENT")
 public class Client {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "client_sequence")
     private Long id;
 
-    @Column(name = "client_name", nullable = false, length = 32)
+    @Column(name = "first_name", length = 10)
     private String name;
 
-    @Temporal(TemporalType.DATE)
-    private Date enrollmentDate;
-
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
+    private String surname;
 
     @Transient
-    private String uuid;
+    private String transient2;
 
+    @Enumerated(value = EnumType.STRING)
+    private Gender gender;
 
-    public Client() {
+    @Column(name = "enrollment_date")
+    @Temporal(TemporalType.DATE) // TIMESTAMP
+    private Date enrollmentDate = new Date();
 
-    }
-
-    public Client(String name, Date enrollmentDate, Gender gender) {
-        this.name = name;
-        this.enrollmentDate = enrollmentDate;
-        this.gender = gender;
-        this.uuid = UUID.randomUUID().toString();
-    }
+    @Convert(converter = YesNoConverter.class)
+    private boolean active;
 
     public Long getId() {
         return id;
@@ -52,12 +48,12 @@ public class Client {
         this.name = name;
     }
 
-    public Date getEnrollmentDate() {
-        return enrollmentDate;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setEnrollmentDate(Date enrollmentDate) {
-        this.enrollmentDate = enrollmentDate;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public Gender getGender() {
@@ -68,11 +64,19 @@ public class Client {
         this.gender = gender;
     }
 
-    public String getUuid() {
-        return uuid;
+    public Date getEnrollmentDate() {
+        return enrollmentDate;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setEnrollmentDate(Date enrollmentDate) {
+        this.enrollmentDate = enrollmentDate;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

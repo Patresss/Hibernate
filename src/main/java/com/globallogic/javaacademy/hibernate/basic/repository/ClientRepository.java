@@ -3,15 +3,16 @@ package com.globallogic.javaacademy.hibernate.basic.repository;
 import com.globallogic.javaacademy.hibernate.basic.entity.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 
+import java.lang.ref.Cleaner;
 import java.util.List;
+import java.util.Optional;
 
-
-@Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
-    @Query("select c from MyClient c where c.enrollmentDate > CURRENT_DATE ")
-    List<Client> findFutureClients();
+    Optional<Client> findByName(String name);
+
+    @Query("select c from MyClient c where c.name = name ")
+    Optional<Client> findByNameCustom(String name);
 
 }

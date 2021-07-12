@@ -16,14 +16,7 @@ public class Blog {
 
     private String title;
 
-    public Blog() {
-    }
-
-    public Blog(String title) {
-        this.title = title;
-    }
-
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name = "blog_tag",
             joinColumns = @JoinColumn(name = "blog_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
@@ -56,12 +49,10 @@ public class Blog {
 
     public void addTag(Tag tag) {
         tags.add(tag);
-        tag.getBlogs().add(this);
     }
 
     public void removeTag(Tag tag) {
         tags.remove(tag);
-        tag.getBlogs().remove(this);
     }
 
     @Override

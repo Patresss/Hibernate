@@ -35,4 +35,16 @@ public class CarController {
         return carRepository.save(car);
     }
 
+
+    @PostMapping("/default")
+    public Car createCar(@RequestParam String name) {
+        Car car = new Car();
+        Engine engine = new Engine();
+        engine.setName("My engine");
+        car.setEngine(engine);
+        car.setName(name);
+        return carRepository.save(car);
+    }
+
+
 }

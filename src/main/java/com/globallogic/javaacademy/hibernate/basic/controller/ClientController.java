@@ -1,16 +1,13 @@
 package com.globallogic.javaacademy.hibernate.basic.controller;
 
-
 import com.globallogic.javaacademy.hibernate.basic.entity.Client;
-import com.globallogic.javaacademy.hibernate.basic.entity.Gender;
 import com.globallogic.javaacademy.hibernate.basic.repository.ClientRepository;
 import com.globallogic.javaacademy.hibernate.basic.transaction.entitymanager.CustomerEntityManagerService;
-import com.globallogic.javaacademy.hibernate.basic.transaction.propagation.ClientPropagationService;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("clients")
@@ -18,12 +15,20 @@ public class ClientController {
 
     private final ClientRepository clientRepository;
     private final CustomerEntityManagerService customerEntityManagerService;
-    private final ClientPropagationService clientPropagationService;
 
-    public ClientController(ClientRepository clientRepository, CustomerEntityManagerService customerEntityManagerService, ClientPropagationService clientPropagationService) {
+    public ClientController(ClientRepository clientRepository, CustomerEntityManagerService customerEntityManagerService) {
         this.clientRepository = clientRepository;
         this.customerEntityManagerService = customerEntityManagerService;
-        this.clientPropagationService = clientPropagationService;
+    }
+
+    @PostMapping
+    public Client createClient(@RequestBody Client client) {
+       return clientRepository.save(client);
+    }
+
+    @PostMapping("/em")
+    public Client createClientEm(@RequestBody Client client) {
+        return customerEntityManagerService.save(client);
     }
 
     @GetMapping
@@ -31,29 +36,18 @@ public class ClientController {
         return clientRepository.findAll();
     }
 
-    @GetMapping("/future")
-    public List<Client> getFutureClients() {
-        return clientRepository.findFutureClients();
+    @GetMapping("/name/{name}")
+    public Client getClientByName(@PathVariable String name ) {
+        return clientRepository.findByNameCustom(name).orElse(new Client());
     }
 
-
-    @PostMapping
-    public Client createClient(@RequestParam String name, @RequestParam  @DateTimeFormat(pattern="yyyy-MM-dd") Date enrollmentDate, @RequestParam Gender gender) {
-        Client client = new Client(name, enrollmentDate, gender);
-        return clientRepository.save(client);
+    @PostMapping("/default-list")
+    @Transactional
+    public void createClientEm() {
+        customerEntityManagerService.add1DefaultClient();
+        customerEntityManagerService.add2DefaultClient();
+        customerEntityManagerService.add3DefaultClient();
     }
 
-    @PostMapping("/entity-manager")
-    public Client createClientUsingEntityManager(@RequestParam String name, @RequestParam  @DateTimeFormat(pattern="yyyy-MM-dd") Date enrollmentDate, @RequestParam Gender gender) {
-        Client client = new Client(name, enrollmentDate, gender);
-        return customerEntityManagerService.save(client);
-    }
-
-
-    @PostMapping("/propagation")
-    public Client createClientUsingPropagation(@RequestParam String name, @RequestParam  @DateTimeFormat(pattern="yyyy-MM-dd") Date enrollmentDate, @RequestParam Gender gender) {
-        Client client = new Client(name, enrollmentDate, gender);
-        return clientPropagationService.save(client);
-    }
 
 }

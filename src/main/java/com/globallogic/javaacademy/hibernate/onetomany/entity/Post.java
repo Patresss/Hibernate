@@ -1,5 +1,7 @@
 package com.globallogic.javaacademy.hibernate.onetomany.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,16 +10,13 @@ import java.util.List;
 public class Post {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "post_sequence")
     private Long id;
 
     private String title;
 
-    @OneToMany(
-            mappedBy = "post",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Comment> comments = new ArrayList<>();
 
     public Long getId() {
@@ -44,5 +43,13 @@ public class Post {
     public void removeComment(Comment comment) {
         comments.remove(comment);
         comment.setPost(null);
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

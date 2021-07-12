@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
+import static org.springframework.transaction.annotation.Propagation.REQUIRES_NEW;
+
 @Service
 public class CustomerEntityManagerService {
 
@@ -17,14 +19,23 @@ public class CustomerEntityManagerService {
 
     @Transactional
     public Client save(Client client) {
-        entityManager.persist(client);
-//        entityManager.merge(client);
-//        entityManager.detach(client);
-        return client;
+        final Client updatedClient = entityManager.merge(client);
+        return updatedClient;
     }
 
-    @Transactional
-    public Client getById(Long clientId) {
-        return entityManager.find(Client.class, clientId);
+
+    @Transactional(propagation = REQUIRES_NEW)
+    public void add1DefaultClient() {
+        entityManager.persist(new Client());
     }
+
+    public void add2DefaultClient() {
+        entityManager.persist(new Client());
+    }
+
+    public void add3DefaultClient() {
+        entityManager.persist(new Client());
+        throw new RuntimeException("Error");
+    }
+
 }

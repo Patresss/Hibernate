@@ -2,11 +2,10 @@ package com.globallogic.javaacademy.hibernate.manytomany.entity;
 
 import org.hibernate.annotations.NaturalId;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import java.util.*;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Tag {
@@ -18,14 +17,8 @@ public class Tag {
     @NaturalId
     private String name;
 
-    @ManyToMany(mappedBy = "tags")
-    private Set<Blog> blogs = new HashSet<>();
-
-    public Tag() {}
-
-    public Tag(String name) {
-        this.name = name;
-    }
+    //    @ManyToMany(mappedBy = "tags", fetch = FetchType.EAGER)
+//    private Set<Blog> blogs = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -41,14 +34,6 @@ public class Tag {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<Blog> getBlogs() {
-        return blogs;
-    }
-
-    public void setBlogs(Set<Blog> blogs) {
-        this.blogs = blogs;
     }
 
     @Override
