@@ -45,11 +45,11 @@ public class PostController {
     @PostMapping("{postId}/{commentId}")
     @Transactional
     public Post unpinComment(@PathVariable Long postId, @PathVariable Long commentId) {
-        final Post post = postRepository.findById(postId).get();
+        final Post post = postRepository.findById(postId).orElseThrow();
         final Comment commentToUnpin = post.getComments().stream()
                 .filter(comment -> comment.getId().equals(commentId))
                 .findFirst()
-                .get();
+                .orElseThrow();
 
         post.removeComment(commentToUnpin);
         postRepository.save(post);
