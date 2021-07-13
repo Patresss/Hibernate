@@ -1,4 +1,4 @@
-package com.globallogic.javaacademy.hibernate.basic.transaction.entitymanager;
+package com.globallogic.javaacademy.hibernate.basic.transaction;
 
 import com.globallogic.javaacademy.hibernate.basic.entity.Client;
 import org.springframework.stereotype.Service;

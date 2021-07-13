@@ -2,7 +2,7 @@ package com.globallogic.javaacademy.hibernate.basic.controller;
 
 import com.globallogic.javaacademy.hibernate.basic.entity.Client;
 import com.globallogic.javaacademy.hibernate.basic.repository.ClientRepository;
-import com.globallogic.javaacademy.hibernate.basic.transaction.entitymanager.CustomerEntityManagerService;
+import com.globallogic.javaacademy.hibernate.basic.transaction.CustomerEntityManagerService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
