@@ -22,6 +22,7 @@ public class Comment {
     public void setId(Long id) {
         this.id = id;
     }
+
     public Post getPost() {
         return post;
     }

@@ -2,10 +2,10 @@ package com.globallogic.javaacademy.hibernate.manytomany.entity;
 
 import org.hibernate.annotations.NaturalId;
 
-import javax.persistence.*;
-import java.util.HashSet;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 public class Tag {

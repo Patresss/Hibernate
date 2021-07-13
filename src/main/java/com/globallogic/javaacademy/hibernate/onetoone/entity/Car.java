@@ -13,7 +13,7 @@ public class Car {
     private String name;
 
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name= "car_engine_id", referencedColumnName = "engine_id")
+    @JoinColumn(name = "car_engine_id", referencedColumnName = "engine_id")
     private Engine engine;
 
     public Long getId() {

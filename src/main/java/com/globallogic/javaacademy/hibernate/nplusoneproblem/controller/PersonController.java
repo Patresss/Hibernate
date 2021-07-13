@@ -24,6 +24,7 @@ public class PersonController {
 
     @PostMapping
     public void printAddresses() {
+//        final List<Person> persons = personRepository.findAll();
         final List<Person> persons = personRepository.findPersonsWithAddresses();
         persons.stream()
                 .map(Person::getAddresses)

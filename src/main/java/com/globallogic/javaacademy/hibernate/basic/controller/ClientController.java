@@ -23,7 +23,7 @@ public class ClientController {
 
     @PostMapping
     public Client createClient(@RequestBody Client client) {
-       return clientRepository.save(client);
+        return clientRepository.save(client);
     }
 
     @PostMapping("/em")
@@ -37,7 +37,7 @@ public class ClientController {
     }
 
     @GetMapping("/name/{name}")
-    public Client getClientByName(@PathVariable String name ) {
+    public Client getClientByName(@PathVariable String name) {
         return clientRepository.findByNameCustom(name).orElse(new Client());
     }
 
