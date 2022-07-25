@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="GL-43242_090.xml" author="piechaczek">
+        <createTable tableName="CONTACT">
+            <column name="CONTACT_ID" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="GL-43242_091.xml" author="piechaczek">
+        <sql>
+            CREATE SEQUENCE contact_seq INCREMENT 50 START 100;
+        </sql>
+    </changeSet>
+
+    <changeSet id="GL-43242_092.xml" author="piechaczek" runOnChange="true">
+        <sql>
+            ALTER TABLE CONTACT ADD PHONE_NUMBER VARCHAR(64);
+            ALTER TABLE CONTACT ADD FARMER_ID NUMERIC;
+        </sql>
+    </changeSet>
+
+
+</databaseChangeLog>

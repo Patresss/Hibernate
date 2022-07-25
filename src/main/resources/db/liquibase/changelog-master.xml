@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+
+    <include relativeToChangelogFile="true" file="changelogs/GL-43242_010.xml"/>
+    <include relativeToChangelogFile="true" file="changelogs/GL-43242_020.xml"/>
+    <include relativeToChangelogFile="true" file="changelogs/GL-43242_030.xml"/>
+    <include relativeToChangelogFile="true" file="changelogs/GL-43242_040.xml"/>
+    <include relativeToChangelogFile="true" file="changelogs/GL-43242_050.xml"/>
+    <include relativeToChangelogFile="true" file="changelogs/GL-43242_060.xml"/>
+    <include relativeToChangelogFile="true" file="changelogs/GL-43242_070.xml"/>
+    <include relativeToChangelogFile="true" file="changelogs/GL-43242_080.xml"/>
+    <include relativeToChangelogFile="true" file="changelogs/GL-43242_090.xml"/>
+    <include relativeToChangelogFile="true" file="changelogs/GL-43242_100.xml"/>
+
+
+
+</databaseChangeLog>

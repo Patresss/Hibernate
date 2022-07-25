@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="GL-43242_100.xml" author="piechaczek">
+        <createTable tableName="ADDRESS">
+            <column name="ADDRESS_ID" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="GL-43242_101.xml" author="piechaczek">
+        <sql>
+            CREATE SEQUENCE address_seq INCREMENT 50 START 100;
+        </sql>
+    </changeSet>
+
+    <changeSet id="GL-43242_102.xml" author="piechaczek" runOnChange="true">
+        <sql>
+            ALTER TABLE ADDRESS ADD CITY VARCHAR(64);
+            ALTER TABLE ADDRESS ADD POSITION_X NUMERIC;
+            ALTER TABLE ADDRESS ADD POSITION_Y NUMERIC;
+        </sql>
+    </changeSet>
+
+    <changeSet id="GL-43242_103.xml" author="piechaczek" runOnChange="true">
+        <sql>
+            CREATE TABLE FARMER_ADDRESS (
+                FARMER_ID INTEGER NOT NULL REFERENCES FARMER(FARMER_ID),
+                ADDRESS_ID INTEGER NOT NULL REFERENCES ADDRESS(ADDRESS_ID)
+            );
+        </sql>
+    </changeSet>
+
+
+</databaseChangeLog>
