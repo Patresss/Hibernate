@@ -71,5 +71,12 @@ public class FarmerService {
         return false;
     }
 
+    @Transactional
+    public Set<String> findPhonesWithFarmer() {
+        return farmerRepository.findAllByGender(Gender.MALE).stream()
+                .flatMap(farmer -> farmer.getContacts().stream())
+                .map(Contact::getPhoneNumber)
+                .collect(Collectors.toSet());
+    }
 
 }

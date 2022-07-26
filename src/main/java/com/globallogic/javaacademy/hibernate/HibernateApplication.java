@@ -1,7 +1,6 @@
 package com.globallogic.javaacademy.hibernate;
 
 import com.globallogic.javaacademy.hibernate.entity.*;
-import com.globallogic.javaacademy.hibernate.service.ContactService;
 import com.globallogic.javaacademy.hibernate.service.ContractService;
 import com.globallogic.javaacademy.hibernate.service.FarmerService;
 import org.springframework.boot.SpringApplication;
@@ -103,7 +102,7 @@ public class HibernateApplication {
     }
 
     private static void nPlusOneProblem(final ConfigurableApplicationContext applicationContext) {
-        final ContactService contactService = applicationContext.getBean(ContactService.class);
+        final FarmerService contactService = applicationContext.getBean(FarmerService.class);
 
         final Set<String> phones = contactService.findPhonesWithFarmer();
         System.out.println(phones);
