@@ -23,6 +23,15 @@ public class FarmerService {
         return farmerRepository.save(farmer);
     }
 
+    public void saveFarmerTransaction(final Farmer farmer1, final Farmer farmer2, final Farmer farmer3) {
+        farmerRepository.save(farmer1);
+        farmerRepository.save(farmer2);
+        if (1==1) {
+            throw new RuntimeException();
+        }
+        farmerRepository.save(farmer3);
+    }
+
     public Set<Farmer> findFemale() {
         return farmerRepository.findAllByGender(Gender.FEMALE);
     }
