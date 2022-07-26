@@ -31,6 +31,9 @@ public class Farmer {
     @Convert(converter = YesNoConverter.class)
     private boolean activeStatus;
 
+    @Transient
+    private String accountNumber;
+
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "CONTRACT_ID", referencedColumnName = "CONTRACT_ID")
     private Contract contract;
@@ -123,5 +126,14 @@ public class Farmer {
 
     public Set<Address> getAddresses() {
         return addresses;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public Farmer setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+        return this;
     }
 }

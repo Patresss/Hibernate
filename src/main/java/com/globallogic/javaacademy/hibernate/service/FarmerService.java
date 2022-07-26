@@ -1,6 +1,5 @@
 package com.globallogic.javaacademy.hibernate.service;
 
-import com.globallogic.javaacademy.hibernate.entity.Address;
 import com.globallogic.javaacademy.hibernate.entity.Contact;
 import com.globallogic.javaacademy.hibernate.entity.Farmer;
 import com.globallogic.javaacademy.hibernate.entity.Gender;
@@ -48,5 +47,20 @@ public class FarmerService {
                 .findFirst()
                 .ifPresent(farmer::removeContact);
     }
+
+
+    @Transactional
+    public void transaction(final Long farmerId) {
+        final Farmer farmer = farmerRepository.findById(farmerId).orElseThrow();
+        farmer.setName("UPDATED");
+        if (isValid(farmer)) { // doesn't make sense because farmer is persisted
+            farmerRepository.save(farmer);
+        }
+    }
+
+    private boolean isValid(Farmer farmer) {
+        return false;
+    }
+
 
 }
